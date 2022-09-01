@@ -29,11 +29,12 @@ where
     for i in 0..vec.len() {
         is_bubbled = false;
 
-        for j in 0..(vec.len() - i - 1) {
-            if vec[j] > vec[j + 1] {
-                let temp = vec[j];
-                vec[j] = vec[j + 1];
-                vec[j + 1] = temp;
+        // 模拟窗口迭代
+        for (x, y) in (1..(vec.len() - i)).enumerate() {
+            if vec[x] > vec[y] {
+                let temp = vec[x];
+                vec[x] = vec[y];
+                vec[y] = temp;
                 is_bubbled = true;
             }
         }
