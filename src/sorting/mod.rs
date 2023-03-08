@@ -21,7 +21,7 @@
 ///
 pub fn bubble_sort<T>(vec: &mut Vec<T>)
 where
-    T: Copy + Ord,
+    T: PartialOrd,
 {
     // 冒泡行为标志
     let mut is_bubbled;
@@ -41,7 +41,7 @@ where
             }
         }
 
-        // 若没有冒泡行为，说明已排好序，可提前退出
+        // 若本轮没有冒泡行为，说明已排好序，可提前退出
         if !is_bubbled {
             break;
         }
