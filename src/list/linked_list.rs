@@ -43,6 +43,23 @@ impl<T> LinkedList<T> {
     pub fn get(&mut self, idx: usize) -> Option<&T> {
         self.get_node(idx).map(|node| &node.value)
     }
+
+    pub fn rev(&mut self) {
+        if self.size <= 1 {
+            return;
+        }
+        let mut prev_pointer = self.head.take().unwrap();
+        let mut next_pointer = prev_pointer.next.take().unwrap();
+
+        while next_pointer.next.is_some() {
+            let temp = next_pointer.next.take().unwrap();
+            next_pointer.next = Some(prev_pointer);
+            prev_pointer = next_pointer;
+            next_pointer = temp;
+        }
+        next_pointer.next = Some(prev_pointer);
+        self.head = Some(next_pointer);
+    }
 }
 
 impl<T> List<T> for LinkedList<T> {
